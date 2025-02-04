@@ -48,7 +48,7 @@ if (isset($_GET['logout'])) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="loan.php">
             <i class="fas fa-dollar-sign"></i>
             <span>Loans</span>
           </a>
@@ -57,6 +57,12 @@ if (isset($_GET['logout'])) {
           <a class="nav-link" href="#">
             <i class="fas fa-calendar"></i>
             <span>Payments</span>
+          </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="change_password.php">
+            <i class="fas fa-key"></i>
+            <span>Change Password</span>
           </a>
         </li>
         <li class="nav-item">

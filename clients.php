@@ -16,39 +16,47 @@ if (!isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="css/slider.css">
 </head>
 <body>
-  <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar">
+<!-- Sidebar -->
+<nav id="sidebar" class="sidebar">
+    <!-- Toggler inside the sidebar -->
     <div class="sidebar-toggler" onclick="toggleSidebar()">
       <i class="fas fa-bars"></i>
     </div>
+    <!-- Navigation Links -->
     <div class="sidebar-sticky">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" href="dashboard.php">
+          <a class="nav-link active" href="#">
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="clients.php">
+          <a class="nav-link" href="clients.php">
             <i class="fas fa-users"></i>
             <span>Clients</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="loans.php">
+          <a class="nav-link" href="loan.php">
             <i class="fas fa-dollar-sign"></i>
             <span>Loans</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="payments.php">
+          <a class="nav-link" href="#">
             <i class="fas fa-calendar"></i>
             <span>Payments</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="settings.php">
+        <a class="nav-link" href="change_password.php">
+            <i class="fas fa-key"></i>
+            <span>Change Password</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
             <i class="fas fa-cogs"></i>
             <span>Settings</span>
           </a>
