@@ -3,19 +3,21 @@ include 'config.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
     // Prepare and execute the query to fetch the user by email
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch();
-    
+    $stmt = $conn->prepare("SELECT id, name, email, encrypted_password FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc(); // Fetch user data as an associative array
+
     // Check if user exists and verify the password
     if ($user && password_verify($password, $user['encrypted_password'])) {
         // Store user details in session
         $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['name'];  //Store the user's name in the session
+        $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_email'] = $user['email'];
 
         // Redirect to dashboard

@@ -44,13 +44,13 @@ if (!isset($_SESSION['user_id'])) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">
+          <a class="nav-link" href="loan.php">
             <i class="fas fa-dollar-sign"></i>
             <span>Loans</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="payments.php">
+          <a class="nav-link active" href="payments.php">
             <i class="fas fa-calendar"></i>
             <span>Payments</span>
           </a>
@@ -79,8 +79,8 @@ if (!isset($_SESSION['user_id'])) {
 
   <!-- Main Content -->
   <div id="content" class="content">
-    <h1 class="h2">Loan</h1>
-    <p>This is Loan page</p>
+    <h1 class="h2">Payments</h1>
+    <p>This is Payments page</p>
   </div>
 
   <!-- Bootstrap JS -->

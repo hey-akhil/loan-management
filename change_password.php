@@ -67,17 +67,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <div class="sidebar-sticky">
       <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="clients.php"><i class="fas fa-users"></i> Clients</a></li>
-        <li class="nav-item"><a class="nav-link" href="loan.php"><i class="fas fa-dollar-sign"></i> Loans</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-calendar"></i> Payments</a></li>
-        <li class="nav-item"><a class="nav-link active" href="change_password.php"><i class="fas fa-key"></i> Change Password</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-cogs"></i> Settings</a></li>
-        <li class="nav-item"><a class="nav-link" href="?logout=true"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard.php">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="new-user.php">
+            <i class="fas fa-user-plus"></i>
+            <span>Add User</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="clients.php">
+            <i class="fas fa-users"></i>
+            <span>Clients</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="loan.php">
+            <i class="fas fa-dollar-sign"></i>
+            <span>Loans</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="payments.php">
+            <i class="fas fa-calendar"></i>
+            <span>Payments</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">
+            <i class="fas fa-key"></i>
+            <span>Change Password</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="setting.php">
+            <i class="fas fa-cogs"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="?logout=true">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </li>
       </ul>
     </div>
   </nav>
-
+  
   <!-- Main Content -->
   <div id="content" class="content">
     <div class="container">
@@ -88,21 +129,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <?php endif; ?>
 
       <form method="POST">
-        <div class="mb-3">
+      <div class="mb-3">
           <label>Current Password:</label>
           <input type="password" class="form-control" name="current_password" required>
-        </div>
-        <div class="mb-3">
+      </div>
+      <div class="mb-3">
           <label>New Password:</label>
           <input type="password" class="form-control" name="new_password" required>
-        </div>
-        <div class="mb-3">
+      </div>
+      <div class="mb-3">
           <label>Confirm New Password:</label>
           <input type="password" class="form-control" name="confirm_password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Change Password</button>
-      </form>
-      <a href="dashboard.php" class="btn btn-secondary mt-3">Back to Dashboard</a>
+      </div>
+
+      <!-- Buttons placed together -->
+      <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary">Change Password</button>
+          <a href="../loan/setting.php" class="btn btn-secondary">Back to Dashboard</a>
+      </div>
+  </form>
+
+      <!-- <a href="dashboard.php" class="btn btn-secondary mt-3">Back to Dashboard</a> -->
     </div>
   </div>
 
@@ -115,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Password changed successfully!
+          Password changed successfully! Redirecting to the dashboard...
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
@@ -132,10 +179,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       document.getElementById('content').classList.toggle('closed');
     }
 
-    // Show success modal if password changed successfully
+    // Show success modal and redirect after 3 seconds if password changed successfully
     <?php if ($success): ?>
       var successModal = new bootstrap.Modal(document.getElementById('successModal'));
       successModal.show();
+      setTimeout(function() {
+        window.location.href = "dashboard.php";
+      }, 3000);
     <?php endif; ?>
   </script>
 

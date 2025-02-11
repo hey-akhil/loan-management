@@ -42,6 +42,12 @@ if (isset($_GET['logout'])) {
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="new-user.php">
+            <i class="fas fa-user-plus"></i>
+            <span>Add User</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="clients.php">
             <i class="fas fa-users"></i>
             <span>Clients</span>
@@ -54,7 +60,7 @@ if (isset($_GET['logout'])) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="payments.php">
             <i class="fas fa-calendar"></i>
             <span>Payments</span>
           </a>
@@ -66,7 +72,7 @@ if (isset($_GET['logout'])) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="setting.php">
             <i class="fas fa-cogs"></i>
             <span>Settings</span>
           </a>
