@@ -1,5 +1,12 @@
 <?php
+session_start();
 $current_page = basename($_SERVER['PHP_SELF']); // Get current page file name
+if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
+    session_start();
+    session_destroy();
+    header('Location: index.php'); // Redirect to the login page after logout
+    exit();
+}
 ?>
 
 <nav id="sidebar" class="sidebar closed">

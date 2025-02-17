@@ -39,28 +39,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Login</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Ensure the body and html cover the full height */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        /* Full height flex container */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background-color: #f4f4f4; */
+        }
+
+        /* Centered form box with responsive width */
+        .login-container {
+            width: 100%;
+            max-width: 400px; /* Maximum width for the form */
+            padding: 20px;
+            /* background-color: white; */
+            /* border-radius: 8px; */
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            margin-top: 10px;
+        }
+
+        /* Make the link more readable */
+        .text-center a {
+            color: #007bff;
+        }
+
+        .text-danger {
+            color: red;
+        }
+    </style>
 </head>
 
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-sm-10 col-md-6 col-lg-4">
-                <form method="post" class="bg-white p-4 rounded shadow">
-                    <h2 class="text-center">Login</h2>
-                    <?php if (isset($error)) {
-                        echo "<p class='text-danger text-center'>$error</p>";
-                    } ?>
-                    <div class="mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
-                    <p class="text-center mt-2"><a href="register.php">Don't have an account? Register</a></p>
-                </form>
+<body>
+    <div class="login-container">
+        <form method="post" class="bg-white p-4 rounded shadow">
+            <h2 class="text-center">Login</h2>
+            <?php if (isset($error)) {
+                echo "<p class='text-danger text-center'>$error</p>";
+            } ?>
+            <div class="mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Email" required>
             </div>
-        </div>
+            <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+            <p class="text-center mt-2"><a href="register.php">Don't have an account? Register</a></p>
+        </form>
     </div>
 </body>
 

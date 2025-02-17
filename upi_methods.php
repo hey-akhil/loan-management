@@ -186,7 +186,7 @@ $result = $conn->query($sql);
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit UPI Method</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="edit_id">
@@ -200,7 +200,7 @@ $result = $conn->query($sql);
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" onclick="updateEntry()">Save Changes</button>
                 </div>
             </div>
@@ -208,6 +208,32 @@ $result = $conn->query($sql);
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let editUpiInput = document.getElementById("edit_upi_id");
+            let editPayeeInput = document.getElementById("edit_payee_name");
+            let saveButton = document.querySelector("#editModal .btn-primary");
+
+            function checkChanges() {
+                let id = document.getElementById("edit_id").value;
+                let originalUpi = document.getElementById("row_" + id).querySelector(".upi").innerText;
+                let originalPayee = document.getElementById("row_" + id).querySelector(".payee").innerText;
+
+                // Enable button only if input values are changed
+                if (editUpiInput.value !== originalUpi || editPayeeInput.value !== originalPayee) {
+                    saveButton.disabled = false;
+                } else {
+                    saveButton.disabled = true;
+                }
+            }
+
+            // Disable button on modal open & attach event listeners to inputs
+            document.getElementById("editModal").addEventListener("shown.bs.modal", function () {
+                saveButton.disabled = true;
+                editUpiInput.addEventListener("input", checkChanges);
+                editPayeeInput.addEventListener("input", checkChanges);
+            });
+        });
+
         document.getElementById('generateQR').addEventListener('click', function () {
             generateQRCode();
         });

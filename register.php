@@ -1,9 +1,9 @@
 <?php
 include 'config.php';
 
-// Ensure the connection uses UTF-8
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$conn->exec("SET NAMES 'utf8'");
+// // Ensure the connection uses UTF-8
+// $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// $conn->exec("SET NAMES 'utf8'");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];

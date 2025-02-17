@@ -91,16 +91,16 @@ $result = $conn->query($query);
     <form method="post" class="mb-4">
       <h4>Add New Admins</h4>
       <div class="row g-3">
-        <div class="col-md-4 col-sm-2">
+        <div class="col-md-4 col-sm-3">
           <input type="text" name="name" class="form-control" placeholder="Name" required>
         </div>
-        <div class="col-md-4 col-sm-2">
+        <div class="col-md-4 col-sm-3">
           <input type="email" name="email" class="form-control" placeholder="Email" required>
         </div>
-        <div class="col-md-4 col-sm-2">
+        <div class="col-md-4 col-sm-3">
           <input type="password" name="password" class="form-control" placeholder="Password" required>
         </div>
-        <div class="col-6">
+        <div class="col-3">
           <button type="submit" name="add_user" class="btn btn-success w-100">Add User</button>
         </div>
       </div>
@@ -127,10 +127,18 @@ $result = $conn->query($query);
                 <td><?= htmlspecialchars($row['email']); ?></td>
                 <td><?= htmlspecialchars($row['created_at']); ?></td>
                 <td>
-                  <a href="edit_user.php?id=<?= $row['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                  <!-- Edit Link with Icon -->
+                  <a href="edit_user.php?id=<?= $row['id']; ?>" class="btn btn-primary btn-sm">
+                    <i class="fas fa-edit"></i> <!-- Font Awesome Edit Icon -->
+                  </a>
+
+                  <!-- Delete Link with Icon -->
                   <a href="?delete_id=<?= $row['id']; ?>" class="btn btn-danger btn-sm"
-                    onclick="return confirm('Are you sure?')">Delete</a>
+                    onclick="return confirm('Are you sure?')">
+                    <i class="fas fa-trash-alt"></i> <!-- Font Awesome Trash Icon -->
+                  </a>
                 </td>
+
               </tr>
             <?php endwhile; ?>
           <?php else: ?>
@@ -144,7 +152,7 @@ $result = $conn->query($query);
 
     <!-- Back to Dashboard Button -->
     <div class="mt-3">
-      <a href="../loan/setting.php" class="btn btn-secondary w-100">Back to Dashboard</a>
+      <a href="../loan/setting.php" class="btn btn-secondary col-sm-3">Back to Setting</a>
     </div>
   </div>
 
