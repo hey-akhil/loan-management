@@ -1,11 +1,11 @@
 <?php
 session_start();
-require 'config.php'; // Ensure database connection
+require 'config.php'; // Database connection
 
-// Redirect if user is not logged in
-if (!isset($_SESSION['user_name']) || !isset($_SESSION['user_id'])) {
-    header('Location: index.php');
-    exit();
+// Redirect if not logged in
+if (!isset($_SESSION['user_id'])) {
+  header('Location: index.php');
+  exit();
 }
 
 $message = "";
@@ -13,114 +13,61 @@ $success = false;
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user_id = $_SESSION['user_id']; 
-    $current_password = $_POST['current_password'];
-    $new_password = $_POST['new_password'];
-    $confirm_password = $_POST['confirm_password'];
+  $user_id = $_SESSION['user_id'];
+  $current_password = $_POST['current_password'];
+  $new_password = $_POST['new_password'];
+  $confirm_password = $_POST['confirm_password'];
 
-    if ($new_password !== $confirm_password) {
-        $message = "New passwords do not match.";
+  if ($new_password !== $confirm_password) {
+    $message = "New passwords do not match.";
+  } else {
+    // Fetch stored password
+    $stmt = $conn->prepare("SELECT encrypted_password FROM users WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($stored_password);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Verify current password
+    if (password_verify($current_password, $stored_password)) {
+      // Hash new password
+      $new_hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+
+      // Update password in DB
+      $update_stmt = $conn->prepare("UPDATE users SET encrypted_password = ? WHERE id = ?");
+      $update_stmt->bind_param("si", $new_hashed_password, $user_id);
+      if ($update_stmt->execute()) {
+        $success = true; // Trigger success popup
+      } else {
+        $message = "Error updating password.";
+      }
+      $update_stmt->close();
     } else {
-        // Fetch stored password
-        $stmt = $conn->prepare("SELECT encrypted_password FROM users WHERE id = ?");
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $stmt->bind_result($stored_password);
-        $stmt->fetch();
-        $stmt->close();
-
-        // Verify current password
-        if (password_verify($current_password, $stored_password)) {
-            // Hash new password
-            $new_hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
-
-            // Update password in DB
-            $update_stmt = $conn->prepare("UPDATE users SET encrypted_password = ? WHERE id = ?");
-            $update_stmt->bind_param("si", $new_hashed_password, $user_id);
-            if ($update_stmt->execute()) {
-                $success = true; // Trigger success popup
-            } else {
-                $message = "Error updating password.";
-            }
-            $update_stmt->close();
-        } else {
-            $message = "Current password is incorrect.";
-        }
+      $message = "Current password is incorrect.";
     }
+  }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Password</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="css/slider.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Password</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="css/slider.css">
 </head>
+
 <body>
-  <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar">
-    <div class="sidebar-toggler" onclick="toggleSidebar()">
-      <i class="fas fa-bars"></i>
-    </div>
-    <div class="sidebar-sticky">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link" href="dashboard.php">
-            <i class="fas fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="new-user.php">
-            <i class="fas fa-user-plus"></i>
-            <span>Add User</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="clients.php">
-            <i class="fas fa-users"></i>
-            <span>Clients</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="loan.php">
-            <i class="fas fa-dollar-sign"></i>
-            <span>Loans</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="payments.php">
-            <i class="fas fa-calendar"></i>
-            <span>Payments</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">
-            <i class="fas fa-key"></i>
-            <span>Change Password</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="setting.php">
-            <i class="fas fa-cogs"></i>
-            <span>Settings</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="?logout=true">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  
+
+  <!-- Include Sidebar -->
+  <?php include 'sidebar.php'; ?>
+
   <!-- Main Content -->
-  <div id="content" class="content">
+  <div id="content" class="content closed">
     <div class="container">
       <h2>Change Password</h2>
 
@@ -129,27 +76,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <?php endif; ?>
 
       <form method="POST">
-      <div class="mb-3">
+        <div class="mb-3">
           <label>Current Password:</label>
           <input type="password" class="form-control" name="current_password" required>
-      </div>
-      <div class="mb-3">
+        </div>
+        <div class="mb-3">
           <label>New Password:</label>
           <input type="password" class="form-control" name="new_password" required>
-      </div>
-      <div class="mb-3">
+        </div>
+        <div class="mb-3">
           <label>Confirm New Password:</label>
           <input type="password" class="form-control" name="confirm_password" required>
-      </div>
+        </div>
 
-      <!-- Buttons placed together -->
-      <div class="d-flex gap-2">
+        <div class="d-flex gap-2">
           <button type="submit" class="btn btn-primary">Change Password</button>
-          <a href="../loan/setting.php" class="btn btn-secondary">Back to Dashboard</a>
-      </div>
-  </form>
-
-      <!-- <a href="dashboard.php" class="btn btn-secondary mt-3">Back to Dashboard</a> -->
+          <a href="setting.php" class="btn btn-secondary">Back to Settings</a>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -162,10 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Password changed successfully! Redirecting to the dashboard...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+          Password changed successfully! Redirecting...
         </div>
       </div>
     </div>
@@ -179,15 +120,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       document.getElementById('content').classList.toggle('closed');
     }
 
-    // Show success modal and redirect after 3 seconds if password changed successfully
     <?php if ($success): ?>
       var successModal = new bootstrap.Modal(document.getElementById('successModal'));
       successModal.show();
-      setTimeout(function() {
+      setTimeout(function () {
         window.location.href = "dashboard.php";
       }, 3000);
     <?php endif; ?>
   </script>
 
 </body>
+
 </html>

@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$database = "loan_system"; 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "loan_system";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
