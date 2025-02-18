@@ -45,13 +45,13 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
                     <span>Payments</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link <?= ($current_page == 'change_password.php') ? 'active' : '' ?>"
                     href="change_password.php">
                     <i class="fas fa-key"></i>
                     <span>Change Password</span>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link <?= ($current_page == 'setting.php') ? 'active' : '' ?>" href="setting.php">
                     <i class="fas fa-cogs"></i>

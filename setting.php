@@ -39,6 +39,18 @@ if (!isset($_SESSION['user_id'])) {
           <h5 class="mt-3">UPI Payment Methods</h5>
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm p-3 mb-4" onclick="redirectTo('change_password.php')">
+          <i class="fas fa-key fa-3x text-muted"></i>
+          <h5 class="mt-3">Change Password</h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm p-3 mb-4" onclick="redirectTo('#')">
+          <i class="fas fa-file-alt fa-3x text-info"></i>
+          <h5 class="mt-3">Documentation</h5>
+        </div>
+      </div>
     </div>
   </div>
 
