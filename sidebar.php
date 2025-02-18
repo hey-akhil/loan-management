@@ -1,10 +1,10 @@
 <?php
 session_start();
-$current_page = basename($_SERVER['PHP_SELF']); // Get current page file name
+$current_page = basename($_SERVER['PHP_SELF']);
 if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
     session_start();
     session_destroy();
-    header('Location: index.php'); // Redirect to the login page after logout
+    header('Location: index.php');
     exit();
 }
 ?>
@@ -67,3 +67,50 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
         </ul>
     </div>
 </nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("sidebar");
+        const content = document.getElementById("content");
+
+        // Get the current page from PHP
+        const currentPage = "<?= $current_page ?>";
+
+        // Ensure sidebar state persists without flickering
+        if (localStorage.getItem("sidebarState") === "open") {
+            sidebar.classList.remove("closed");
+            content.classList.remove("closed");
+        } else {
+            sidebar.classList.add("closed");
+            content.classList.add("closed");
+        }
+
+        // Function to toggle sidebar
+        function toggleSidebar() {
+            sidebar.classList.toggle("closed");
+            content.classList.toggle("closed");
+
+            // Save state in localStorage
+            localStorage.setItem("sidebarState", sidebar.classList.contains("closed") ? "closed" : "open");
+        }
+
+        // Assign function to toggler button
+        document.querySelector(".sidebar-toggler").addEventListener("click", toggleSidebar);
+
+        // Prevent reload when clicking the current page link
+        document.querySelectorAll(".nav-link").forEach(link => {
+            link.addEventListener("click", function (event) {
+                const clickedPage = this.getAttribute("href");
+
+                // If the clicked link is the same as the current page, prevent reloading
+                if (clickedPage === currentPage) {
+                    event.preventDefault();
+                } else {
+                    // Ensure sidebar remains in the same state after page change
+                    localStorage.setItem("sidebarState", sidebar.classList.contains("closed") ? "closed" : "open");
+                }
+            });
+        });
+    });
+</script>
+

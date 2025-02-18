@@ -65,17 +65,6 @@ if (isset($_GET['logout'])) {
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const content = document.getElementById('content');
-
-      // Toggle the 'closed' class
-      sidebar.classList.toggle('closed');
-      content.classList.toggle('closed');
-    }
-
-  </script>
 </body>
 
 </html>

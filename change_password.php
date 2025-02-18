@@ -115,17 +115,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- Bootstrap JS & JavaScript for Popup -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('closed');
-      document.getElementById('content').classList.toggle('closed');
-    }
-
     <?php if ($success): ?>
       var successModal = new bootstrap.Modal(document.getElementById('successModal'));
       successModal.show();
       setTimeout(function () {
         window.location.href = "dashboard.php";
-      }, 3000);
+      }, 2000);
     <?php endif; ?>
   </script>
 
