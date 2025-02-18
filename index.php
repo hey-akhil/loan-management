@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         /* Ensure the body and html cover the full height */
-        html, body {
+        html,
+        body {
             height: 100%;
             margin: 0;
         }
@@ -57,7 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         /* Centered form box with responsive width */
         .login-container {
             width: 100%;
-            max-width: 400px; /* Maximum width for the form */
+            max-width: 400px;
+            /* Maximum width for the form */
             padding: 20px;
             /* background-color: white; */
             /* border-radius: 8px; */
