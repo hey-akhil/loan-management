@@ -9,11 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/slider.css">
     <!-- <link rel="stylesheet" href="css/styles.css"> -->
-     <style>
-        .dark-mode .table th{
+    <style>
+        .dark-mode .table th {
             color: none;
         }
-     </style>
+    </style>
 </head>
 
 <body>
@@ -22,58 +22,54 @@
     include('day-night-toggler.php');
     ?>
 
-<div id="content" class="content closed">
+    <div id="content" class="content closed">
         <h2 class="">Loan EMI Calculator</h2>
 
-    
-            <div class="col-lg-6 col-md-8 col-sm-12">
-                <form id="emiForm" class="p-4 shadow-sm bg-none rounded">
-                    <div class="mb-3">
-                        <label class="form-label">Loan Amount (₹)</label>
-                        <input type="number" class="form-control" id="loanAmount" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Annual Interest Rate (%)</label>
-                        <input type="number" class="form-control" id="interestRate" step="0.01" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Loan Tenure (Years)</label>
-                        <input type="number" class="form-control" id="loanTenure" required>
-                    </div>
-
-                    <!-- Buttons with proper spacing -->
-                    <div class="d-grid gap-2 d-sm-flex">
-                        <button type="button" class="btn btn-primary" onclick="calculateEMI()">Calculate EMI</button>
-                        <a href="dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
-                    </div>
-                </form>
-
-                <!-- EMI Result Display -->
-                <div class="result mt-4 p-3 bg-none shadow-sm rounded d-none" id="emiResultContainer">
-                    <h5 class="text-center">EMI Breakdown</h5>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th>Monthly EMI</th>
-                                <td id="monthlyEMI"></td>
-                            </tr>
-                            <tr>
-                                <th>Total Payable</th>
-                                <td id="totalPayable"></td>
-                            </tr>
-                            <tr>
-                                <th>Total Interest</th>
-                                <td id="totalInterest"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+        <form id="emiForm" class="p-4 shadow-sm bg-none rounded">
+            <div class="mb-3">
+                <label class="form-label">Loan Amount (₹)</label>
+                <input type="number" class="form-control" id="loanAmount" required>
             </div>
+
+            <div class="mb-3">
+                <label class="form-label">Annual Interest Rate (%)</label>
+                <input type="number" class="form-control" id="interestRate" step="0.01" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Loan Tenure (Years)</label>
+                <input type="number" class="form-control" id="loanTenure" required>
+            </div>
+        </form>
+
+        <!-- EMI Result Display -->
+        <div class="result p-3 bg-none shadow-sm rounded d-none" id="emiResultContainer">
+            <h5 class="text-center">EMI Breakdown</h5>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Total Interest</th>
+                        <td id="totalInterest"></td>
+                    </tr>
+                    <tr>
+                        <th>Monthly EMI</th>
+                        <td id="monthlyEMI"></td>
+                    </tr>
+                    <tr>
+                        <th>Total Payable</th>
+                        <td id="totalPayable"></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        <!-- Buttons with proper spacing -->
+        <div class="d-grid gap-2 d-sm-flex">
+            <button type="button" class="btn btn-primary" onclick="calculateEMI()">Calculate EMI</button>
+            <a href="dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
         </div>
     </div>
+
 
     <script>
         function calculateEMI() {
@@ -101,4 +97,4 @@
 
 </body>
 
-</html>
+</html> 
