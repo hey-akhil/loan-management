@@ -19,7 +19,9 @@ if (!isset($_SESSION['user_id'])) {
 
 <body>
   <!-- Sidebar -->
-  <?php include 'sidebar.php'; ?>
+  <?php include 'sidebar.php'; 
+  include ('day-night-toggler.php');
+  ?>
 
   <!-- Main Content -->
   <div id="content" class="content closed">

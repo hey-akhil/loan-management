@@ -29,8 +29,10 @@ if (isset($_GET['logout'])) {
 
 <body>
 
-  <!-- Include Sidebar -->
-  <?php include 'sidebar.php'; ?>
+<!-- Include Sidebar -->
+    <?php include 'sidebar.php';
+    include('day-night-toggler.php');
+    ?>
 
   <!-- Main Content -->
   <div id="content" class="content closed">

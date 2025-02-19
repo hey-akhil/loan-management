@@ -8,7 +8,8 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
     exit();
 }
 ?>
-
+<link rel="stylesheet" href="css/day-night.css">
+<?php include 'day-night-toggler.php'; ?>
 <nav id="sidebar" class="sidebar closed">
     <div class="sidebar-toggler" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>

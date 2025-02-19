@@ -86,8 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
+    <?php include('day-night-toggler.php');?>
     <div class="login-container">
-        <form method="post" class="bg-white p-4 rounded shadow">
+        <form method="post" class="bg-none p-4 rounded shadow">
             <h2 class="text-center">Login</h2>
             <?php if (isset($error)) {
                 echo "<p class='text-danger text-center'>$error</p>";

@@ -73,7 +73,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
   <!-- Include Sidebar -->
-  <?php include 'sidebar.php'; ?>
+  <?php include 'sidebar.php'; 
+  include ('day-night-toggler.php');
+  ?>
 
   <div id="content" class="content closed">
     <h2>Add New User</h2>

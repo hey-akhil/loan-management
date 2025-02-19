@@ -123,7 +123,9 @@ $result = $conn->query($sql);
 
 <body>
     <!-- Sidebar -->
-    <?php include 'sidebar.php'; ?>
+    <?php include 'sidebar.php';
+    include('day-night-toggler.php');
+    ?>
 
     <!-- Main Content -->
     <div id="content" class="content closed">
@@ -186,7 +188,7 @@ $result = $conn->query($sql);
     </div>
 
     <!-- Edit Modal -->
-    <div id="editModal" class="modal fade" tabindex="-1">
+    <div id="editModal" class="modal fade" style="background: none" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
