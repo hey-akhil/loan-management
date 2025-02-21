@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- <script src="inspect-prevent.js"></script> -->
+    <!-- <script src="JavaScript/inspect-prevent.js"></script> -->
     <link rel="stylesheet" href="css/day-night.css">
     <link rel="stylesheet" href="css/slider.css">
 
