@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- <link rel="icon" type="image/png" href="images/img.png"> -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
@@ -86,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <?php include('day-night-toggler.php');?>
+    <?php include('day-night-toggler.php'); ?>
     <div class="login-container">
         <form method="post" class="bg-none p-4 rounded shadow">
             <h2 class="text-center">Login</h2>
